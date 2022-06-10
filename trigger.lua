@@ -1,11 +1,12 @@
-function(allstates, event, ...)
+function (allstates, event, ...)
     if (event == "SHOW_PORTAL_OVERLAY") then
         local spellFlyoutButtons = aura_env.getSpellFlyoutButtons()
 
         for _, buttonFrame in ipairs(spellFlyoutButtons) do
             if (buttonFrame and buttonFrame.spellID) then
                 local spellID = buttonFrame.spellID
-                local shouldShow = aura_env.isReadyToCast(spellID) or not aura_env.config.hideOnCooldown
+                local shouldShow = aura_env.isReadyToCast(spellID) or
+                                       not aura_env.config.hideOnCooldown
 
                 if (aura_env.heroPathData[spellID] and shouldShow) then
                     allstates[spellID] = {

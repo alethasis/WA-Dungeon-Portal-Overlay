@@ -14,9 +14,7 @@ aura_env.heroPathData = {
 -- UTIL
 aura_env.getKeys = function(t)
     local keys = {}
-    for key, _ in pairs(t) do
-        table.insert(keys, key)
-    end
+    for key, _ in pairs(t) do table.insert(keys, key) end
     return keys
 end
 
@@ -51,23 +49,14 @@ end
 if not aura_env.region.SpellFlyoutHook then
     local aura_env = aura_env
 
-    C_Timer.After(
-        1,
-        function()
-            SpellFlyout:HookScript(
-                "OnShow",
-                function()
-                    WeakAuras.ScanEvents("SHOW_PORTAL_OVERLAY", true)
-                end
-            )
-            SpellFlyout:HookScript(
-                "OnHide",
-                function()
-                    WeakAuras.ScanEvents("HIDE_PORTAL_OVERLAY", true)
-                end
-            )
+    C_Timer.After(1, function()
+        SpellFlyout:HookScript("OnShow", function()
+            WeakAuras.ScanEvents("SHOW_PORTAL_OVERLAY", true)
+        end)
+        SpellFlyout:HookScript("OnHide", function()
+            WeakAuras.ScanEvents("HIDE_PORTAL_OVERLAY", true)
+        end)
 
-            aura_env.region.SpellFlyoutHook = true
-        end
-    )
+        aura_env.region.SpellFlyoutHook = true
+    end)
 end
